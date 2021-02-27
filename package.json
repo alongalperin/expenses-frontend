@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "primeflex": "^2.0.0",
+    "primevue": "^3.3.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -38,5 +40,7 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "_id": "expenses@0.1.0",
+  "readme": "ERROR: No README data found!"
 }
