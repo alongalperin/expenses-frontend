@@ -3,6 +3,7 @@
   <ExpenseInsert @submit-expense="addExpense" />
   <div style="margin-top: 500px">
     <FullCalendar :options="options" :events="events" />
+    {{ getP() }}
   </div>
 </template>
 
@@ -21,6 +22,11 @@ import interactionPlugin from "@fullcalendar/interaction";
   components: {
     ExpenseInsert,
     FullCalendar,
+  },
+  methods: {
+    getP() {
+      return process.env.test ? process.env.ROOT_API : "no";
+    },
   },
 })
 export default class App extends Vue {
