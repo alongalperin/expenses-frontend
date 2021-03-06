@@ -25,7 +25,7 @@ import interactionPlugin from "@fullcalendar/interaction";
   },
   methods: {
     getP() {
-      return process.env.test ? process.env.ROOT_API : "no";
+      return process.env.test ? process.env.test : "no";
     },
   },
 })
