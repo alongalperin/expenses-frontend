@@ -23,6 +23,7 @@
     <div class="p-fluid p-grid">
       <div class="p-field p-lg-offset-5 p-md-2 p-col-12">
         <Button label="Submit" @click="submitExpense" />
+        <p>{{ testStore() }}</p>
       </div>
     </div>
   </div>
@@ -30,6 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import store from "../store/store";
 
 export default defineComponent({
   name: "ExpenseInsert",
@@ -50,6 +52,9 @@ export default defineComponent({
         start: new Date().getTime(),
       };
       this.$emit("submit-expense", newExpense);
+    },
+    testStore(): string {
+      return store.state.name;
     },
   },
 });

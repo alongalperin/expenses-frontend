@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import store from "./store/store";
 
 import PrimeVue from "primevue/config";
 import Button from "primevue/button";
@@ -11,6 +12,7 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 
 const app = createApp(App);
+app.use(store);
 app.use(PrimeVue);
 
 app.component("Button", Button);
