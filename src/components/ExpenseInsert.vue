@@ -14,7 +14,12 @@
         </span>
       </div>
       <div class="p-field p-md-4 p-col-12">
-        <Dropdown v-model="selectedCategory" :options="categories" optionLabel="name" placeholder="Select a City" />
+        <Dropdown
+          v-model="selectedCategory"
+          :options="categories"
+          optionLabel="name"
+          placeholder="Select a City"
+        />
       </div>
     </div>
     <div class="p-fluid p-grid">
@@ -27,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import axios from "axios";
 import store from "../store/store";
 
 export default defineComponent({
@@ -37,11 +43,13 @@ export default defineComponent({
       selectedCategory: null,
       description: "",
       price: null,
-      categories: [{}]
+      categories: [{}],
     };
   },
-  created() {
-    this.categories = store.state.categories;
+  async mounted() {
+    const categories = await axios.get("http://localhost:8000/categories");
+    console.log(categories.data);
+    this.categories = categories.data;
   },
   methods: {
     submitExpense(): void {
@@ -50,7 +58,7 @@ export default defineComponent({
         title: this.description,
         price: this.price,
         category: this.selectedCategory,
-        start: new Date().getTime()
+        start: new Date().getTime(),
       };
       this.$emit("submit-expense", newExpense);
       this.resetFields();

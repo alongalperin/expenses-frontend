@@ -2,12 +2,9 @@
   <h1>Expenses App</h1>
   <ExpenseInsert @submit-expense="addExpense" />
   <div>
-    <!-- <ExpensesList :expenses="expenses" />
-    <Calendar :expenses="expenses" /> -->
     <router-link to="/">List</router-link> |
     <router-link to="/calendar">Calendar</router-link>
     <router-view :expenses="expenses" />
-    {{ getP() }}
   </div>
 </template>
 
@@ -25,9 +22,6 @@ import Calendar from "./components/Calendar.vue";
     Calendar
   },
   methods: {
-    getP() {
-      return process.env.VUE_APP_TEST ? process.env.VUE_APP_TEST : "no";
-    },
   },
 })
 export default class App extends Vue {
