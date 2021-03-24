@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import axios from "axios";
 import store from "../store/store";
 
 export default defineComponent({
@@ -40,8 +41,10 @@ export default defineComponent({
       categories: [{}]
     };
   },
-  created() {
-    this.categories = store.state.categories;
+  async mounted() {
+    const categories = await axios.get("http://localhost:8000/categories");
+    console.log(categories);
+    this.categories = categories.data;
   },
   methods: {
     submitExpense(): void {

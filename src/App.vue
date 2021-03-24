@@ -1,14 +1,11 @@
 <template>
-  <h1>Expenses App</h1>
-  <ExpenseInsert @submit-expense="addExpense" />
-  <div>
-    <!-- <ExpensesList :expenses="expenses" />
-    <Calendar :expenses="expenses" /> -->
+	<h1>Expenses App</h1>
+	<ExpenseInsert @submit-expense="addExpense" />
+	<div>
     <router-link to="/">List</router-link> |
-    <router-link to="/calendar">Calendar</router-link>
-    <router-view :expenses="expenses" />
-    {{ getP() }}
-  </div>
+		<router-link to="/calendar">Calendar</router-link>
+		<router-view :expenses="expenses" />
+	</div>
 </template>
 
 <script lang="ts">
@@ -19,38 +16,34 @@ import ExpensesList from "./components/ExpensesList.vue";
 import Calendar from "./components/Calendar.vue";
 
 @Options({
-  components: {
-    ExpenseInsert,
-    ExpensesList,
-    Calendar
-  },
-  methods: {
-    getP() {
-      return process.env.VUE_APP_TEST ? process.env.VUE_APP_TEST : "no";
-    },
-  },
+	components: {
+		ExpenseInsert,
+		ExpensesList,
+		Calendar
+	},
+	methods: {}
 })
 export default class App extends Vue {
-  public expenses: any[] = [];
+	public expenses: any[] = [];
 
-  created() {
-    this.getEvents();
-  }
+	created() {
+		this.getEvents();
+	}
 
-  public addExpense(expense: any) {
-    this.expenses = [...this.expenses, expense];
-  }
+	public addExpense(expense: any) {
+		this.expenses = [...this.expenses, expense];
+	}
 
-  public getEvents() {
-    return this.expenses;
-  }
+	public getEvents() {
+		return this.expenses;
+	}
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-}                       
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	text-align: center;
+	color: #2c3e50;
+}
 </style>

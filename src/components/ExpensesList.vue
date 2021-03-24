@@ -1,7 +1,8 @@
 <template>
     <div class="layout-content">
         <div class="content-section implementation">
-            <div class="card">
+            <p v-if="!expenses.length">No Expenses registered yet</p>
+            <div v-if="expenses.length" class="card">
                 <DataTable :value="expenses">
                     <Column field="title" header="Title"></Column>
                     <Column field="price" header="Price"></Column>
