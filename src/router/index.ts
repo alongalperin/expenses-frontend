@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import List from "@/components/ExpensesList.vue";
 import Calendar from "@/components/Calendar.vue";
+import Categories from "@/components/Categories.vue";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     props: {
         expenses: "expenses"
     }
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    component: Categories
   },
 ];
 

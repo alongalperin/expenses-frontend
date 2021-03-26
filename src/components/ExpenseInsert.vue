@@ -33,7 +33,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import store from "../store/store";
+// import store from "../store/store";
 
 export default defineComponent({
   name: "ExpenseInsert",
@@ -61,9 +61,6 @@ export default defineComponent({
       };
       this.$emit("submit-expense", newExpense);
       this.resetFields();
-    },
-    getCategories() {
-      return store.state.categories;
     },
     resetFields() {
       this.description = "";
