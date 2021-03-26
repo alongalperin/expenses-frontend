@@ -48,7 +48,6 @@ export default defineComponent({
   },
   async mounted() {
     const categories = await axios.get("http://localhost:8000/categories");
-    console.log(categories.data);
     this.categories = categories.data;
   },
   methods: {

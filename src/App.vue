@@ -6,6 +6,7 @@
     <router-link to="/calendar">Calendar</router-link>
     <router-view :expenses="expenses" />
   </div>
+
 </template>
 
 <script lang="ts">
@@ -16,35 +17,34 @@ import ExpensesList from "./components/ExpensesList.vue";
 import Calendar from "./components/Calendar.vue";
 
 @Options({
-  components: {
-    ExpenseInsert,
-    ExpensesList,
-    Calendar
-  },
-  methods: {
-  },
+	components: {
+		ExpenseInsert,
+		ExpensesList,
+		Calendar
+	},
+	methods: {}
 })
 export default class App extends Vue {
-  public expenses: any[] = [];
+	public expenses: any[] = [];
 
-  created() {
-    this.getEvents();
-  }
+	created() {
+		this.getEvents();
+	}
 
-  public addExpense(expense: any) {
-    this.expenses = [...this.expenses, expense];
-  }
+	public addExpense(expense: any) {
+		this.expenses = [...this.expenses, expense];
+	}
 
-  public getEvents() {
-    return this.expenses;
-  }
+	public getEvents() {
+		return this.expenses;
+	}
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-}                       
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	text-align: center;
+	color: #2c3e50;
+}
 </style>
