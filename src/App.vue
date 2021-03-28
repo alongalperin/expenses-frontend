@@ -15,6 +15,9 @@
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
 import { Options, Vue } from "vue-class-component";
+import axios from "axios";
+import store from "./store/store";
+
 import ExpenseInsert from "./components/ExpenseInsert.vue";
 import ExpensesList from "./components/ExpensesList.vue";
 import Calendar from "./components/Calendar.vue";
@@ -31,6 +34,12 @@ import Categories from "./components/Categories.vue";
 })
 export default class App extends Vue {
 	public expenses: any[] = [];
+
+	async mounted() {
+		const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
+		// this.categories = categories.data;
+		store.state.categories = categories.data;
+	}
 
 	created() {
 		this.getEvents();

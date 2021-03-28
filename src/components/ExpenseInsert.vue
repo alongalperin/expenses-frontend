@@ -16,7 +16,7 @@
       <div class="p-field p-md-4 p-col-12">
         <Dropdown
           v-model="selectedCategory"
-          :options="categories"
+          :options="getCategories"
           optionLabel="name"
           placeholder="Select a City"
         />
@@ -33,7 +33,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-// import store from "../store/store";
+import store from "../store/store";
 
 export default defineComponent({
   name: "ExpenseInsert",
@@ -46,10 +46,10 @@ export default defineComponent({
       categories: [{}],
     };
   },
-  async mounted() {
-    const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
-    this.categories = categories.data;
-  },
+  // async mounted() {
+  //   const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
+  //   this.categories = categories.data;
+  // },
   methods: {
     submitExpense(): void {
       const newExpense = {
@@ -68,6 +68,11 @@ export default defineComponent({
       this.selectedCategory = null;
     },
   },
+  computed: {
+    getCategories() {
+      return store.state.categories;
+    }
+  }
 });
 </script>
 

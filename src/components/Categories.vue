@@ -2,7 +2,7 @@
 	<div class="p-col-12 p-lg-4 contacts">
 		<Panel header="Categories">
 			<ul>
-				<li v-for="category in categories" :key="category.name">
+				<li v-for="category in getCategories" :key="category.name">
 					<button class="p-link" :style="{ height: '57px' }">
                         <img :src="category.image" width="35" alt="avatar1"/>
                         <!-- <Pizza /> -->
@@ -15,7 +15,6 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
 import store from "../store/store";
 
 import Panel from 'primevue/panel';
@@ -29,13 +28,14 @@ export default defineComponent({
   },
   components: {Panel},
   props: ["expenses"],
-  async mounted() {
-    const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
-    this.categories = categories.data;
-  },
   methods: {
       getImagePath(category: any) {
           return '@/assets/icons/school-bus.png';
+      }
+  },
+  computed: {
+      getCategories() {
+          return store.state.categories;
       }
   }
 });
