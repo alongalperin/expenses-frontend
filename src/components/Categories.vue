@@ -30,9 +30,8 @@ export default defineComponent({
   components: {Panel},
   props: ["expenses"],
   async mounted() {
-    const categories = await axios.get("http://localhost:8000/categories");
+    const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
     this.categories = categories.data;
-    console.log(categories.data[0].image)
   },
   methods: {
       getImagePath(category: any) {
