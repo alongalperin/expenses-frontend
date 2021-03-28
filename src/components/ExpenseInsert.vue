@@ -47,7 +47,7 @@ export default defineComponent({
     };
   },
   async mounted() {
-    const categories = await axios.get("http://localhost:8000/categories");
+    const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
     this.categories = categories.data;
   },
   methods: {

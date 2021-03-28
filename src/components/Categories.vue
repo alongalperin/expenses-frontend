@@ -36,7 +36,7 @@ export default defineComponent({
   },
   methods: {
       getImagePath(category: any) {
-          return "@/assets/icons/" + category.image;
+          return '@/assets/icons/school-bus.png';
       }
   }
 });
