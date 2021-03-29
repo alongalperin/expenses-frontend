@@ -18,8 +18,18 @@
           v-model="selectedCategory"
           :options="getCategories"
           optionLabel="name"
-          placeholder="Select a City"
-        />
+          placeholder="Select a Category"
+        >
+          <template #option="slotProps">
+            <div class="p-d-flex p-ai-center country-item">
+              <div class="option-wrapper">
+                <img class="flag" :src="slotProps.option.image" />
+                <div>{{slotProps.option.name}}</div>
+              </div>
+            </div>
+          </template>
+        </Dropdown>
+        
       </div>
     </div>
     <div class="p-fluid p-grid">
@@ -32,7 +42,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
 import store from "../store/store";
 
 export default defineComponent({
@@ -46,10 +55,6 @@ export default defineComponent({
       categories: [{}],
     };
   },
-  // async mounted() {
-  //   const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
-  //   this.categories = categories.data;
-  // },
   methods: {
     submitExpense(): void {
       const newExpense = {
@@ -76,4 +81,34 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.country-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  .option-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.country-item img.flag {
+  width: 18px;
+  margin-right: .5rem;
+}
+
+.flag {
+  vertical-align: middle;
+}
+
+span.flag {
+  width:44px;
+  height:30px;
+  display:inline-block;
+}
+
+img.flag {
+  width:30px;
+}
+</style>

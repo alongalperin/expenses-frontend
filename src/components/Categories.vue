@@ -1,11 +1,16 @@
 <template>
 	<div class="p-col-12 p-lg-4 contacts">
-		<Panel header="Categories">
+		<Panel>
+            <template #header>
+                <span class="panel-header-text">Categories</span>
+            </template>
+            <template #icons>
+                <Button label="New" icon="pi pi-plus" class="p-button-success panel-header-button" @click="openNew" />
+            </template>
 			<ul>
 				<li v-for="category in getCategories" :key="category.name">
 					<button class="p-link" :style="{ height: '57px' }">
                         <img :src="category.image" width="35" alt="avatar1"/>
-                        <!-- <Pizza /> -->
 						<span class="name">{{category.name}}</span>
 					</button>
 				</li>
@@ -31,6 +36,9 @@ export default defineComponent({
   methods: {
       getImagePath(category: any) {
           return '@/assets/icons/school-bus.png';
+      },
+      openNew() {
+          alert('a')
       }
   },
   computed: {
@@ -41,55 +49,67 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-    .contacts {
-        margin: 0px auto;
+.p-panel-icons {
+    display: none !important;
+}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+.contacts {
+    margin: 0px auto;
 
-            li {
-                border-bottom: 1px solid #e3e3e3;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
 
-                button {
-                    display: flex;
-                    align-items: center;
-                    padding: 9px;
-                    width: 100%;
-                    box-sizing: border-box;
-                    text-decoration: none;
-                    position: relative;
-                    border-radius: 2px;
-                    transition: background-color .2s;
+        li {
+            border-bottom: 1px solid #e3e3e3;
 
-                    .name {
-                        margin-left: 1em;
-                        font-size: 18px;
-                    }
+            button {
+                display: flex;
+                align-items: center;
+                padding: 9px;
+                width: 100%;
+                box-sizing: border-box;
+                text-decoration: none;
+                position: relative;
+                border-radius: 2px;
+                transition: background-color .2s;
 
-                    .email {
-                        position: absolute;
-                        right: 10px;
-                        top: 30px;
-                        font-size: 14px;
-                        color: #707070;
-                    }
-
-                    &:hover {
-                        cursor: pointer;
-                        background-color: #eeeeee;
-                    }
+                .name {
+                    margin-left: 1em;
+                    font-size: 18px;
                 }
 
-                &:last-child {
-                    border: 0;
+                .email {
+                    position: absolute;
+                    right: 10px;
+                    top: 30px;
+                    font-size: 14px;
+                    color: #707070;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: #eeeeee;
                 }
             }
-        }
 
-        .p-panel-content {
-            min-height: 256px;
+            &:last-child {
+                border: 0;
+            }
         }
     }
+
+    .p-panel-content {
+        min-height: 256px;
+    }
+
+    .panel-header-text {
+        font-weight: 600;
+    }
+
+    .panel-header-button {
+        right: 10px;
+    }
+}
 </style>
