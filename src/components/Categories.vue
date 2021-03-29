@@ -5,7 +5,7 @@
                 <span class="panel-header-text">Categories</span>
             </template>
             <template #icons>
-                <Button label="New" icon="pi pi-plus" class="p-button-success panel-header-button" @click="openNew" />
+                <Button label="New" icon="pi pi-plus" class="panel-header-button" @click="openNewCategory" />
             </template>
 			<ul>
 				<li v-for="category in getCategories" :key="category.name">
@@ -16,10 +16,18 @@
 				</li>
 			</ul>
 		</Panel>
+        <Dialog v-model:visible="categoryDialog" :style="{width: '450px'}" header="Category Details" :modal="true" class="p-fluid">
+            <div class="p-field">
+                <label for="name">Category Name</label>
+                <InputText id="name" v-model.trim="category.name" required="true" autofocus />
+                <button @click="addCategory">click</button>
+            </div>
+        </Dialog>
 	</div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import axios from "axios";
 import store from "../store/store";
 
 import Panel from 'primevue/panel';
@@ -28,17 +36,21 @@ export default defineComponent({
   name: "Categries",
   data() {
     return {
-        categories: [{}]
+        categories: [{}],
+        categoryDialog: false,
+        category: {
+            name: ""
+        }
     };
   },
   components: {Panel},
   props: ["expenses"],
   methods: {
-      getImagePath(category: any) {
-          return '@/assets/icons/school-bus.png';
+      openNewCategory() {
+          this.categoryDialog = true;
       },
-      openNew() {
-          alert('a')
+      addCategory() {
+          store.state.categories.push({ name: this.category.name, code: 2})
       }
   },
   computed: {

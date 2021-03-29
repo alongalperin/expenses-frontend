@@ -12,6 +12,7 @@ import PrimeVue from "primevue/config";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Dropdown from 'primevue/dropdown';
+import Dialog from 'primevue/dialog';
 
 const app = createApp(App);
 app.use(router);
@@ -21,5 +22,6 @@ app.use(PrimeVue);
 app.component("Button", Button);
 app.component("InputText", InputText);
 app.component("Dropdown", Dropdown);
+app.component("Dialog", Dialog);
 
 app.mount("#app");
