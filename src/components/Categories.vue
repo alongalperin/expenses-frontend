@@ -49,7 +49,10 @@ export default defineComponent({
       openNewCategory() {
           this.categoryDialog = true;
       },
-      addCategory() {
+      async addCategory() {
+          await axios.post(process.env.VUE_APP_CATEGORIES_URL, {
+              name: this.category.name
+          });
           store.state.categories.push({ name: this.category.name, code: 2})
       }
   },
