@@ -36,8 +36,7 @@ export default class App extends Vue {
 	public expenses: any[] = [];
 
 	async mounted() {
-		const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL);
-		// this.categories = categories.data;
+		const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL + '/categories');
 		store.state.categories = categories.data;
 	}
 

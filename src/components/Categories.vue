@@ -9,10 +9,15 @@
             </template>
 			<ul>
 				<li v-for="category in getCategories" :key="category.name">
-					<button class="p-link" :style="{ height: '57px' }">
+					<span class="category-wrapper" :class="isSelected(category.name) ? 'selected' : ''" :style="{ height: '57px' }" v-on:click="setSelectedCategory(category.name)">
                         <img :src="category.image" width="35" alt="avatar1"/>
-						<span class="name">{{category.name}}</span>
-					</button>
+						<span class="category-name">{{category.name}}</span>
+                        <span
+                            class="category-edit-button"
+                            :class="isSelected(category.name) ? 'selected-category-edit' : ''">
+                            edit
+                        </span>
+					</span>
 				</li>
 			</ul>
 		</Panel>
@@ -40,7 +45,8 @@ export default defineComponent({
         categoryDialog: false,
         category: {
             name: ""
-        }
+        },
+        selectedCategory: "",
     };
   },
   components: {Panel},
@@ -54,7 +60,17 @@ export default defineComponent({
               name: this.category.name
           });
           store.state.categories.push({ name: this.category.name, code: 2})
-      }
+      },
+      setSelectedCategory(name: string) {
+          if (this.selectedCategory !== name) {
+            this.selectedCategory = name;
+          } else {
+            this.selectedCategory = "";
+          }
+      },
+    isSelected(name: string): boolean {
+        return this.selectedCategory === name;
+    }
   },
   computed: {
       getCategories() {
@@ -79,7 +95,7 @@ export default defineComponent({
         li {
             border-bottom: 1px solid #e3e3e3;
 
-            button {
+            .category-wrapper {
                 display: flex;
                 align-items: center;
                 padding: 9px;
@@ -90,23 +106,28 @@ export default defineComponent({
                 border-radius: 2px;
                 transition: background-color .2s;
 
-                .name {
+                .category-name {
                     margin-left: 1em;
                     font-size: 18px;
-                }
-
-                .email {
-                    position: absolute;
-                    right: 10px;
-                    top: 30px;
-                    font-size: 14px;
-                    color: #707070;
                 }
 
                 &:hover {
                     cursor: pointer;
                     background-color: #eeeeee;
+
+                    .category-edit-button {
+                        position: absolute;
+                        right: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: grey;
+                    }
                 }
+            }
+
+            .category-edit-button {
+                display: none;
             }
 
             &:last-child {
@@ -125,6 +146,21 @@ export default defineComponent({
 
     .panel-header-button {
         right: 10px;
+    }
+}
+
+.selected {    
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #b7e0b8;
+
+    .category-edit-button {
+        position: absolute;
+        right: 20px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: grey !important;
     }
 }
 </style>
