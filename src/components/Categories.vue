@@ -25,15 +25,14 @@
             <div class="p-field">
                 <label for="name">Category Name</label>
                 <InputText id="name" v-model.trim="category.name" required="true" autofocus />
-                <button @click="addCategory">click</button>
+                <button class="add-category-submit" @click="addCategory">click</button>
             </div>
         </Dialog>
 	</div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
-import store from "../store/store";
+// import store from '../store/store'
 
 import Panel from 'primevue/panel';
 
@@ -41,7 +40,6 @@ export default defineComponent({
   name: "Categries",
   data() {
     return {
-        categories: [{}],
         categoryDialog: false,
         category: {
             name: ""
@@ -53,13 +51,10 @@ export default defineComponent({
   props: ["expenses"],
   methods: {
       openNewCategory() {
-          this.categoryDialog = true;
+        this.categoryDialog = true;
       },
-      async addCategory() {
-          await axios.post(process.env.VUE_APP_CATEGORIES_URL, {
-              name: this.category.name
-          });
-          store.state.categories.push({ name: this.category.name, code: 2})
+      async addCategory () {
+        this.$store.dispatch('addCategory', { name: this.category.name, code: 2});
       },
       setSelectedCategory(name: string) {
           if (this.selectedCategory !== name) {
@@ -73,8 +68,9 @@ export default defineComponent({
     }
   },
   computed: {
-      getCategories() {
-          return store.state.categories;
+      getCategories(): any {
+        // @ts-ignore
+        return this.$store.state.categories;
       }
   }
 });
