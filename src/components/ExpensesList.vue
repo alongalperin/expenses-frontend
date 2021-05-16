@@ -1,10 +1,11 @@
 <template>
     <div class="layout-content">
         <div class="content-section implementation">
-            <p v-if="!expenses.length">No Expenses registered yet</p>
-            <div v-if="expenses.length" class="card">
-                <DataTable :value="expenses">
-                    <Column field="title" header="Title"></Column>
+            <p v-if="!getExpenses.length">No Expenses registered yet</p>
+            <p v-if="getExpenses.length">yes Expenses registered yet</p>
+            <div v-if="getExpenses.length" class="card">
+                <DataTable :value="getExpenses">
+                    <Column field="description" header="Description"></Column>
                     <Column field="price" header="Price"></Column>
                     <Column field="category.name" header="Category"></Column>
                 </DataTable>
@@ -19,7 +20,7 @@ import Column from 'primevue/column';
 
 export default defineComponent({
   name: "ExpensesList",
-  props: ["expenses"],
+  props: [],
   components: {
     DataTable,
     Column
@@ -29,6 +30,13 @@ export default defineComponent({
   },
   created() {},
   methods: {},
+  computed: {
+    getExpenses(): any {
+        // @ts-ignore
+        console.log(this.$store.state.expenses)
+        return this.$store.state.expenses;
+    }
+  }
 });
 </script>
 <style lang="scss" scoped>

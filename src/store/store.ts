@@ -2,12 +2,14 @@ import { createStore } from "vuex";
 import axios from 'axios';
 
 export interface State {
-  categories: any[]
+  categories: any[],
+  expenses: any[]
 }
 
 const store = createStore<State>({
   state: {
-    categories: [] // TODO: create empty array
+    categories: [], // TODO: create empty array
+    expenses: []
   },
   actions: {
     async addCategory({ commit }, category) {
@@ -15,6 +17,13 @@ const store = createStore<State>({
         name: category.name
       });
       commit('addCategory', category);
+    },
+    async addExpense({ commit }, expense) {
+      await axios.post(`${process.env.VUE_APP_EXPENSES_URL}/expenses`, {
+        description: expense.description,
+        price: expense.price
+      });
+      //commit('addCategory', category);
     }
   },
   mutations: {

@@ -64,6 +64,10 @@ export default defineComponent({
         category: this.selectedCategory,
         start: new Date().getTime(),
       };
+
+
+      this.$store.dispatch('addExpense', { description: this.description, price: this.price});
+
       this.$emit("submit-expense", newExpense);
       this.resetFields();
     },

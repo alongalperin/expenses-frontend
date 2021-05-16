@@ -9,7 +9,7 @@ const routes = [
     name: "List",
     component: List,
     props: {
-        expenses: "expenses"
+      expenses: "expenses"
     }
   },
   {
@@ -17,7 +17,7 @@ const routes = [
     name: "Calendar",
     component: Calendar,
     props: {
-        expenses: "expenses"
+      expenses: "expenses"
     }
   },
   {

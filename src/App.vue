@@ -19,14 +19,12 @@ import axios from "axios";
 import store from "./store/store";
 
 import ExpenseInsert from "./components/ExpenseInsert.vue";
-import ExpensesList from "./components/ExpensesList.vue";
 import Calendar from "./components/Calendar.vue";
 import Categories from "./components/Categories.vue";
 
 @Options({
 	components: {
 		ExpenseInsert,
-		ExpensesList,
 		Calendar,
 		Categories
 	},
@@ -38,6 +36,10 @@ export default class App extends Vue {
 	async mounted() {
 		const categories = await axios.get(process.env.VUE_APP_CATEGORIES_URL + '/categories');
 		store.state.categories = categories.data;
+
+		const expenses = await axios.get(process.env.VUE_APP_EXPENSES_URL + '/expenses');
+		store.state.expenses = expenses.data;
+		// this.expenses = expenses.data;
 	}
 
 	created() {

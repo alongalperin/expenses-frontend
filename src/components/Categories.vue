@@ -5,7 +5,7 @@
                 <span class="panel-header-text">Categories</span>
             </template>
             <template #icons>
-                <Button label="New" icon="pi pi-plus" class="panel-header-button" @click="openNewCategory" />
+                <Button label="New" icon="pi pi-plus" class="panel-header-button" @click="openNewCategoryDialog" />
             </template>
 			<ul>
 				<li v-for="category in getCategories" :key="category.name">
@@ -48,30 +48,30 @@ export default defineComponent({
     };
   },
   components: {Panel},
-  props: ["expenses"],
+  props: [],
   methods: {
-      openNewCategory() {
+    openNewCategoryDialog() {
         this.categoryDialog = true;
-      },
-      async addCategory () {
+    },
+    async addCategory () {
         this.$store.dispatch('addCategory', { name: this.category.name, code: 2});
-      },
-      setSelectedCategory(name: string) {
-          if (this.selectedCategory !== name) {
+    },
+    setSelectedCategory(name: string) {
+        if (this.selectedCategory !== name) {
             this.selectedCategory = name;
-          } else {
+        } else {
             this.selectedCategory = "";
-          }
-      },
+        }
+    },
     isSelected(name: string): boolean {
         return this.selectedCategory === name;
     }
   },
   computed: {
-      getCategories(): any {
+    getCategories(): any {
         // @ts-ignore
         return this.$store.state.categories;
-      }
+    }
   }
 });
 </script>
