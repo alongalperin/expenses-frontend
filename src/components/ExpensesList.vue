@@ -5,9 +5,13 @@
             <p v-if="getExpenses.length">yes Expenses registered yet</p>
             <div v-if="getExpenses.length" class="card">
                 <DataTable :value="getExpenses">
-                    <Column field="description" header="Description"></Column>
-                    <Column field="price" header="Price"></Column>
-                    <Column field="category.name" header="Category"></Column>
+                    <Column field="description" header="Description" />
+                    <Column field="price" header="Price" />
+                    <Column field="categoryId" header="Category">
+                        <template #body="slotProps">
+                            {{ getCategoryName(slotProps.data.categoryId)}}
+                        </template>
+                    </Column>
                 </DataTable>
             </div>
         </div>
@@ -26,16 +30,23 @@ export default defineComponent({
     Column
   },
   data() {
-    return {};
+    return {
+      expenses: []
+    };
   },
-  created() {},
-  methods: {},
-  computed: {
-    getExpenses(): any {
-        // @ts-ignore
-        console.log(this.$store.state.expenses)
-        return this.$store.state.expenses;
+  created() {
+      this.expenses = this.$store.state.expenses as [];
+  },
+  methods: {
+    getCategoryName(id: string): any {
+        return this.$store.getters.getCategoryNameById(id);
     }
+  },
+  computed: {
+      getExpenses(): any {
+          console.log(this.$store.state.expenses)
+          return this.$store.state.expenses;
+      }
   }
 });
 </script>

@@ -12,11 +12,11 @@
 					<span class="category-wrapper" :class="isSelected(category.name) ? 'selected' : ''" :style="{ height: '57px' }" v-on:click="setSelectedCategory(category.name)">
                         <img :src="category.image" width="35" alt="avatar1"/>
 						<span class="category-name">{{category.name}}</span>
-                        <span
-                            class="category-edit-button"
-                            :class="isSelected(category.name) ? 'selected-category-edit' : ''">
-                            edit
-                        </span>
+              <span
+                  class="category-edit-button"
+                  :class="isSelected(category.name) ? 'selected-category-edit' : ''">
+                  edit
+              </span>
 					</span>
 				</li>
 			</ul>

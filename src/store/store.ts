@@ -30,6 +30,11 @@ const store = createStore<State>({
     addCategory(state, category) {
       state.categories = [...state.categories, category];
     }
+  },
+  getters: {
+    getCategoryNameById: (state) => (id: string) => {
+      return state.categories.find(category => category.id === id).name;
+    }
   }
 });
 
