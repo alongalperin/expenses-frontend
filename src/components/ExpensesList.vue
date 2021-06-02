@@ -12,6 +12,13 @@
                             {{ getCategoryName(slotProps.data.categoryId)}}
                         </template>
                     </Column>
+                    <Column style="width: 10%; text-align: center" class="column-delete">
+                        <template #body="slotProps" class="column-delete">
+                            <button @click="deleteExpense(slotProps.data.id)">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                        </template>
+                    </Column>
                 </DataTable>
             </div>
         </div>
@@ -40,11 +47,15 @@ export default defineComponent({
   methods: {
     getCategoryName(id: string): any {
         return this.$store.getters.getCategoryNameById(id);
+    },
+    deleteExpense(expenseId: string) {
+        this.$store.dispatch('deleteExpense',
+            { expenseId }
+        );
     }
   },
   computed: {
       getExpenses(): any {
-          console.log(this.$store.state.expenses)
           return this.$store.state.expenses;
       }
   }
