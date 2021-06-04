@@ -33,7 +33,7 @@ import ConfirmDialog from 'primevue/confirmdialog';
 
 export default defineComponent({
   name: "ExpensesList",
-  props: [],
+  props: [], 
   components: {
     DataTable,
     Column,
