@@ -13,11 +13,13 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Dropdown from 'primevue/dropdown';
 import Dialog from 'primevue/dialog';
+import ConfirmationService from 'primevue/confirmationservice';
 
 const app = createApp(App);
 app.use(router);
 app.use(store);
 app.use(PrimeVue);
+app.use(ConfirmationService);
 
 app.component("Button", Button);
 app.component("InputText", InputText);

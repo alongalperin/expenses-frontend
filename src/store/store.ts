@@ -19,14 +19,18 @@ const store = createStore<State>({
       commit('addCategory', category);
     },
     async addExpense({ commit }, expense) {
+      console.log('from store');
+      console.log(expense);
+
       await axios.post(`${process.env.VUE_APP_EXPENSES_URL}/expenses`, {
         description: expense.description,
-        price: expense.price
+        price: expense.price,
+        categoryId: expense.categoryId
       });
-      //commit('addCategory', category);
+      // commit('addCategory', category);
     },
     async deleteExpense({ commit }, expenseId: any) {
-      // await axios.delete(`${process.env.VUE_APP_EXPENSES_URL}/expenses/${expenseId.expenseId}`);
+      await axios.delete(`${process.env.VUE_APP_EXPENSES_URL}/expenses/${expenseId.expenseId}`);
     },
   },
   mutations: {

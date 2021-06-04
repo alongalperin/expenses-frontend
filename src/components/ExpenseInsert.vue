@@ -66,7 +66,11 @@ export default defineComponent({
       };
 
 
-      this.$store.dispatch('addExpense', { description: this.description, price: this.price});
+      this.$store.dispatch('addExpense', {
+        description: this.description,
+        price: this.price,
+        categoryId: 24
+      });
 
       this.$emit("submit-expense", newExpense);
       this.resetFields();

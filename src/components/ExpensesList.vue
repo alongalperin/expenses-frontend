@@ -22,19 +22,22 @@
                 </DataTable>
             </div>
         </div>
+        <ConfirmDialog></ConfirmDialog>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import ConfirmDialog from 'primevue/confirmdialog';
 
 export default defineComponent({
   name: "ExpensesList",
   props: [],
   components: {
     DataTable,
-    Column
+    Column,
+    ConfirmDialog
   },
   data() {
     return {
@@ -49,9 +52,19 @@ export default defineComponent({
         return this.$store.getters.getCategoryNameById(id);
     },
     deleteExpense(expenseId: string) {
-        this.$store.dispatch('deleteExpense',
-            { expenseId }
-        );
+        this.$confirm.require({
+            message: 'Are you sure you want to proceed?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.$store.dispatch('deleteExpense',
+                    { expenseId }
+                );            
+            },
+            reject: () => {
+                //callback to execute when user rejects the action
+            }
+        });
     }
   },
   computed: {
